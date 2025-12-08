@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <climits>
 using namespace std;
 
 /*
@@ -15,7 +16,13 @@ n개의 정수로 이루어진 임의의 수열이 주어진다. 우리는 이 �
 */
 
 /*
+어떤 수 xi가 xi를 더한 구간합의 값보다 크다면 i에서부터 구간합을 다시 계산하면 됨
+구간합이 max보다 커지면 max 구간합을 갱신
 
+ex)
+10  -4  3   1   5   6   -35 12  21  -1
+10  6   9   10  15  21  -14 12  35  34
+10  10  10  10  15  21  21  21  35  35
 
 */
 
@@ -27,6 +34,21 @@ int main(int argc, char **argv) {
 
     int n;
     cin >> n;
+
+    int cur, max, x;
+    
+    cin >> x;
+    max = cur = x;
+
+    for (int i = 1; i < n; i++) {
+        cin >> x;
+        cur = cur + x > x ? cur + x : x;
+        if (cur > max) {
+            max = cur;
+        }
+    }
+
+    cout << max;
 
     return 0;
 }
